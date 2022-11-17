@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 
 import '@rainbow-me/rainbowkit/styles.css';
 import {
+  darkTheme,
   getDefaultWallets,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
@@ -19,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const { chains, provider } = configureChains(
     [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
     [
-      infuraProvider({ apiKey: 'cc9638d6c839465f876e71c366c1f04d' }),
+      infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_API_KEY || '' }),
       publicProvider()
     ]
   );
@@ -37,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider chains={chains} theme={darkTheme()}>
         <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
