@@ -1,15 +1,15 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Container } from "@/components/Container";
 
-type PriceProps = {};
+type PriceProps = {
+  price: string;
+};
 
-export const Price: FC<PriceProps> = () => {
-  const [price, setPrice] = useState('---');
-
+export const Price: FC<PriceProps> = ({ price }) => {
   return (
     <Container>
       <p className="heading">Price</p>
-      <p>$&nbsp;200.5728</p>
+      <p>{price !== '' ? `$&nbsp;${price}` : '-'}</p>
     </Container>
   );
 };

@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 import rewardEscrowABI from '@/abi/RewardEscrow.json';
 import stakingRewardsABI from '@/abi/StakingRewards.json';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { Amount } from '@/components/Amount';
@@ -14,6 +14,7 @@ import { Price } from '@/components/Price';
 import { Escrow } from '@/components/Escrow';
 import { Balance } from '@/components/Balance';
 import { useAccount, useContractReads } from 'wagmi';
+import { getKwentaPrice } from '@/utils/getKwentaPrice';
 
 const rewardEscrowContract = {
   address: '0x1066A8eB3d90Af0Ad3F89839b974658577e75BE2',
@@ -28,8 +29,20 @@ const stakingRewardsContract = {
 export default function Home() {
   const { address: account } = useAccount();
 
+  const [price, setPrice] = useState('');
+
   const [escrowedBalance, setEscrowedBalance] = useState('');
   const [stakedEscrowedBalance, setStakedEscrowedBalance] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      const _price = await getKwentaPrice();
+
+      if (_price) {
+        setPrice(_price);
+      }
+    })();
+  }, []);
 
   useContractReads({
     contracts: [
@@ -69,8 +82,8 @@ export default function Home() {
       <h1 className={styles.title}>Showed your <span className={styles.token}>Escrow Kwenta</span> Value</h1>
       <h2 className={styles.subtitle}>Vesting Date Left: TODO</h2>
       <div className={styles.container}>
-        <Amount />
-        <Price />
+        <Amount balance={escrowedBalance} price={price} />
+        <Price price={price} />
         <Balance balance={escrowedBalance} />
         <Escrow escrowBalance={escrowedBalance} stakedEscrowBalance={stakedEscrowedBalance} />
       </div>

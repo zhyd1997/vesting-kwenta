@@ -1,24 +1,31 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Container } from "@/components/Container";
 
-type AmountProps = {};
+type AmountProps = {
+  balance: string;
+  price: string;
+};
 
-export const Amount: FC<AmountProps> = () => {
-  const [amount, setAmount] = useState((200.5728*47).toFixed(4));
+export const Amount: FC<AmountProps> = ({ balance, price }) => {
+  const amount = (Number(balance) * Number(price)).toString();
 
   return (
     <Container>
       <p className="heading">Value</p>
-      <p>
-        $&nbsp;
-        <span className="dollars">
-          {amount.split('.')[0]}
-        </span>
-        .
-        <span className="cents">
-          {amount.split('.')[1]}
-        </span>
-      </p>
+      {(price !== '' && balance !== '') ? (
+        <p>
+          $&nbsp;
+          <span className="dollars">
+            {amount.split('.')[0]}
+          </span>
+          .
+          <span className="cents">
+            {amount.split('.')[1]}
+          </span>
+        </p>
+      ) : (
+        <p>-</p>
+      )}
     </Container>
   );
 };

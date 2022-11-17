@@ -1,42 +1,16 @@
 import axios from 'axios';
 
-const UNISWAP_SUBGRAPH_LINK = 'https://api.thegraph.com/subgraphs/name/ianlapham/optimism-post-regenesis';
+const COINGECKO_API_LINK = 'https://api.coingecko.com/api/v3/simple/token_price';
 
-const kwentaEthPoolQuery = `{
-  pool(id: "0x36e42931a765022790b797963e42c5522d6b585a") {
-    token0 {
-      volume
-      volumeUSD
-    }
-    token0Price
-    token1 {
-      volume
-      volumeUSD
-    }
-    token1Price
-  }
-}`;
+const KWENTA_CONTRACT_ADDRESS = '0x920Cf626a271321C151D027030D5d08aF699456b';
 
 export const getKwentaPrice = async () => {
   try {
-    const res = await axios.post(UNISWAP_SUBGRAPH_LINK, {
-      query: `{
-        pool(id: "0x36e42931a765022790b797963e42c5522d6b585a") {
-          token0 {
-            volume
-            volumeUSD
-          }
-          token0Price
-          token1 {
-            volume
-            volumeUSD
-          }
-          token1Price
-        }
-      }`
-    });
+    const res = await axios.get(
+      `${COINGECKO_API_LINK}/optimistic-ethereum/?contract_addresses=${KWENTA_CONTRACT_ADDRESS}/&vs_currencies=usd&precision=4`
+    );
 
-    return res.data;
+    return res.data[KWENTA_CONTRACT_ADDRESS]?.usd;
   } catch (e) {
     console.error(e);
     return null;
