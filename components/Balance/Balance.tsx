@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Container } from "../Container";
+import { Container } from "@/components/Container";
 
 type BalanceProps = {};
 

@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { Amount } from '../components/Amount';
-import { Price } from '../components/Price';
-import { Escrow } from '../components/Escrow';
-import { Balance } from '../components/Balance';
+import { Amount } from '@/components/Amount';
+import { Price } from '@/components/Price';
+import { Escrow } from '@/components/Escrow';
+import { Balance } from '@/components/Balance';
 
 export default function Home() {
   return (

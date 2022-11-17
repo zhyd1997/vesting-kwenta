@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
-import { getKwentaPrice } from "../../utils/getKwentaPrice";
-import { Container } from "../Container";
+import { getKwentaPrice } from "@/utils/getKwentaPrice";
+import { Container } from "@/components/Container";
 
 type PriceProps = {};
 
@@ -18,7 +18,7 @@ export const Price: FC<PriceProps> = () => {
   return (
     <Container>
       <p className="heading">Price</p>
-      <p>200</p>
+      <p>$&nbsp;200.5728</p>
     </Container>
   );
 };
