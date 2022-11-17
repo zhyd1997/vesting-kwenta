@@ -24,3 +24,16 @@ a {
     background: black;
   }
 }
+
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.dollars {
+  font-size: 32px;
+}
+
+.dollars, .cents {
+  color: green;
+}
