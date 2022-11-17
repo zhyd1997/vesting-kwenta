@@ -1,13 +1,15 @@
 import { FC } from "react";
 import { Container } from "@/components/Container";
 
-type BalanceProps = {};
+type BalanceProps = {
+  balance: string;
+};
 
-export const Balance: FC<BalanceProps> = () => {
+export const Balance: FC<BalanceProps> = ({ balance }) => {
   return (
     <Container>
       <p className="heading">Balance</p>
-      <p>47</p>
+      <p>{balance ? balance : '-'}</p>
     </Container>
   );
 };
