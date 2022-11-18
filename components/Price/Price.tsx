@@ -9,7 +9,7 @@ export const Price: FC<PriceProps> = ({ price }) => {
   return (
     <Container>
       <p className="heading">Price</p>
-      <p>{price !== '' ? `$&nbsp;${price}` : '-'}</p>
+      <p>{price !== '' ? `$ ${price}` : '-'}</p>
     </Container>
   );
 };
