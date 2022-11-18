@@ -7,7 +7,7 @@ type AmountProps = {
 };
 
 export const Amount: FC<AmountProps> = ({ balance, price }) => {
-  const amount = (Number(balance) * Number(price)).toString();
+  const amount = (Number(balance) * Number(price)).toLocaleString();
 
   return (
     <Container>
@@ -20,7 +20,7 @@ export const Amount: FC<AmountProps> = ({ balance, price }) => {
           </span>
           .
           <span className="cents">
-            {amount.split('.')[1]}
+            {amount.split('.')[1].slice(0, 4)}
           </span>
         </p>
       ) : (
