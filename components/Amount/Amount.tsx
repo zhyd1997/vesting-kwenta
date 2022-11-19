@@ -2,17 +2,14 @@ import { FC } from "react";
 import { Container } from "@/components/Container";
 
 type AmountProps = {
-  balance: string;
-  price: string;
+  amount: string;
 };
 
-export const Amount: FC<AmountProps> = ({ balance, price }) => {
-  const amount = (Number(balance) * Number(price)).toLocaleString();
-
+export const Amount: FC<AmountProps> = ({ amount }) => {
   return (
     <Container>
       <p className="heading">Value</p>
-      {(price !== '' && balance !== '') ? (
+      {(amount !== '') ? (
         <p>
           $&nbsp;
           <span className="dollars">
