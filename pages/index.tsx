@@ -38,7 +38,6 @@ export default function Home() {
 
   useEffect(() => {
     if (!account) {
-      setPrice('');
       setEscrowedBalance('');
       setStakedEscrowedBalance('');
     }
