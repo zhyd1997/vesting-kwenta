@@ -34,6 +34,16 @@ export default function Home() {
   const [escrowedBalance, setEscrowedBalance] = useState('');
   const [stakedEscrowedBalance, setStakedEscrowedBalance] = useState('');
 
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if (!account) {
+      setPrice('');
+      setEscrowedBalance('');
+      setStakedEscrowedBalance('');
+    }
+  }, [account]);
+
   useEffect(() => {
     (async () => {
       const _price = await getKwentaPrice();
@@ -43,6 +53,13 @@ export default function Home() {
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (escrowedBalance && price) {
+      const _value =  (Number(escrowedBalance) * Number(price)).toLocaleString('en-US', {minimumFractionDigits: 4});
+      setValue(_value);
+    }
+  }, [escrowedBalance, price])
 
   useContractReads({
     contracts: [
@@ -82,7 +99,7 @@ export default function Home() {
       <h1 className={styles.title}>Showed your <span className={styles.token}>Escrow Kwenta</span> Value</h1>
       <h2 className={styles.subtitle}>Vesting Date Left: TODO</h2>
       <div className={styles.container}>
-        <Amount balance={escrowedBalance} price={price} />
+        <Amount amount={value} />
         <Price price={price} />
         <Balance balance={escrowedBalance} />
         <Escrow escrowBalance={escrowedBalance} stakedEscrowBalance={stakedEscrowedBalance} />
