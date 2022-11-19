@@ -97,7 +97,7 @@ export default function Home() {
         <ConnectButton />
       </div>
       <h1 className={styles.title}>Showed your <span className={styles.token}>Escrow Kwenta</span> Value</h1>
-      <h2 className={styles.subtitle}>Vesting Date Left: TODO</h2>
+      {/* <h2 className={styles.subtitle}>Vesting Date Left: TODO</h2> */}
       <div className={styles.container}>
         <Amount amount={value} />
         <Price price={price} />
